@@ -1,0 +1,28 @@
+[project]
+name = "cyse7380"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "ipykernel>=7.3.0",
+    "jupyterlab>=4.6.4",
+    "jupytext>=1.19.5",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.18.1",
+    "seaborn>=0.13.2",
+    "torch>=2.14.0",
+]
+
+[tool.uv]
+# No NVIDIA GPU on this machine (Intel Arc), so PyTorch is installed from the
+# CPU-only index. The index is declared `explicit` and torch is pointed at it
+# below via [tool.uv.sources]; every other package still resolves from PyPI.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
